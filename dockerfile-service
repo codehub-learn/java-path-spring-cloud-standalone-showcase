@@ -1,0 +1,43 @@
+#########################################################################################################
+# Stage 1: Build, package and export layers stage
+FROM maven:3.9-amazoncorretto-25-alpine AS builder
+LABEL maintainter="Code.Learn <c.giannacoulis@codehub.gr>"
+
+ENV HOME=/home/app
+WORKDIR $HOME
+ADD . $HOME
+
+RUN --mount=type=cache,target=/root/.m2 mvn -f $HOME/pom.xml clean package -Pproduction -DskipTests
+
+
+#########################################################################################################
+# Stage 2: Optimization/Layers stage
+FROM bellsoft/liberica-runtime-container:jdk-25-slim-musl AS optimizer
+LABEL maintainter="Code.Learn <c.giannacoulis@codehub.gr>"
+
+WORKDIR /home/app
+
+ARG JAR_FILE=/home/app/tom-engine-core-service.jar
+COPY --from=builder /home/app/tom-engine/tom-engine-core/target/*.jar ${JAR_FILE}
+
+RUN java -Djarmode=tools -jar ${JAR_FILE} extract --layers --launcher --destination /home/app/extracted-layers
+
+
+
+#########################################################################################################
+# Stage 3: Runtime stage
+FROM bellsoft/liberica-runtime-container:jre-25-slim-musl AS runtime
+LABEL maintainter="Code.Learn <c.giannacoulis@codehub.gr>"
+
+WORKDIR /home/app
+
+COPY --from=optimizer /home/app/extracted-layers/dependencies/ ./
+COPY --from=optimizer /home/app/extracted-layers/spring-boot-loader/ ./
+COPY --from=optimizer /home/app/extracted-layers/snapshot-dependencies/ ./
+COPY --from=optimizer /home/app/extracted-layers/application/ ./
+
+EXPOSE 80/tcp
+
+ENTRYPOINT ["java", "-XX:+AlwaysActAsServerClassMachine", \
+                    "-XX:+UnlockExperimentalVMOptions", \
+					"org.springframework.boot.loader.launch.JarLauncher"]

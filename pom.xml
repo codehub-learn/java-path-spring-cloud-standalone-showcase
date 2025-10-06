@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- Packaging -->
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+
+	<!-- Versioning -->
+	<groupId>gr.codelearn.showcase</groupId>
+	<artifactId>restaurant-system</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.6</version>
+		<relativePath/>
+	</parent>
+
+	<!-- Meta-data -->
+	<name>[${project.artifactId}]</name>
+	<description>Introduction to Microservices architecture using Java and Spring Cloud</description>
+	<organization>
+		<name>Code.Learn by Code.Hub</name>
+		<url>https://www.codehub.gr/codelearn/</url>
+	</organization>
+	<inceptionYear>2025</inceptionYear>
+
+	<modules>
+		<!-- Properties/Variables -->
+		<module>restaurant-system-infra</module>
+		<module>restaurant-system-services/restaurant-system-services-monolith</module>
+	</modules>
+	<properties>
+		<!-- Desired Maven version -->
+		<maven.version>3.9.11</maven.version>
+		<!-- Build JDK -->
+		<java.version>25</java.version>
+
+		<!-- Maven source encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Logging -->
+		<disruptor-maven-plugin.version>4.0.0</disruptor-maven-plugin.version>
+
+		<!-- Mapstruct -->
+		<mapstruct.version>1.6.3</mapstruct.version>
+		<!-- Lombok Mapstruct binding -->
+		<lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
+
+		<!-- Jackson -->
+		<jackson.version>2.19.1</jackson.version>
+		<!-- Jackson Mapper ACL -->
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+
+		<!-- Maven plugins -->
+		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+		<native2ascii-maven-plugin.version>2.1.1</native2ascii-maven-plugin.version>
+		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+		<versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
+	</properties>
+
+	<!-- Dependency Management -->
+	<dependencyManagement>
+		<dependencies>
+			<!--
+			Asynchronous Logging @see https://logging.apache.org/log4j/2.x/manual/async.html
+			Hint:
+			Don't forget to set system property
+			-Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+			 to make all loggers asynchronous
+			-->
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>${disruptor-maven-plugin.version}</version>
+			</dependency>
+
+			<!-- MapStruct -->
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+
+			<!-- Jackson -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-guava</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson-mapper-asl.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+		</dependency>
+
+		<!-- You can easily generate your own configuration metadata file from items annotated with
+		@ConfigurationProperties by using the spring-boot-configuration-processor jar. The jar includes a Java
+		annotation processor which is invoked as your project is compiled. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<!-- Build settings -->
+	<build>
+		<!-- Plugin Management -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<delimiters>
+							<!-- Certain JDBC connection URLs contain special character like the Oracle case -->
+							<delimiter>#</delimiter>
+						</delimiters>
+						<useDefaultDelimiters>false</useDefaultDelimiters>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${maven-enforcer-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>enforce-versions</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireJavaVersion>
+										<version>${java.version}</version>
+									</requireJavaVersion>
+									<requireMavenVersion>
+										<version>${maven.version}</version>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+						<execution>
+							<id>ban-bad-log4j-versions</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<bannedDependencies>
+										<excludes>
+											<exclude>org.apache.logging.log4j:log4j-core:(,2.17.0)</exclude>
+										</excludes>
+									</bannedDependencies>
+								</rules>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<release>${java.version}</release>
+						<fork>true</fork>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>${mapstruct.version}</version>
+							</path>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok-mapstruct-binding</artifactId>
+								<version>${lombok.mapstruct.binding.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>native2ascii-maven-plugin</artifactId>
+					<version>${native2ascii-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>utf8-to-latin1</id>
+							<goals>
+								<goal>resources</goal>
+							</goals>
+							<phase>process-resources</phase>
+							<configuration>
+								<srcDir>src/main/java</srcDir>
+								<targetDir>${project.build.outputDirectory}</targetDir>
+								<encoding>${project.build.sourceEncoding}</encoding>
+								<includes>
+									<include>**/*.properties</include>
+								</includes>
+								<excludes>
+									<exclude></exclude>
+								</excludes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+							<index>true</index>
+							<manifest>
+								<addClasspath>false</addClasspath>
+								<addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+							</manifest>
+							<manifestEntries>
+								<Copyright>(c) Code.Hub 2025</Copyright>
+								<Implementation-Title>TIntroduction to Microservices architecture using Java and Spring Cloud
+								</Implementation-Title>
+								<Implementation-Vendor>Code.Learn</Implementation-Vendor>
+								<Implementation-Version>${project.version}</Implementation-Version>
+								<Specification-Title>Introduction to Microservices architecture using Java and Spring Cloud
+								</Specification-Title>
+								<Specification-Vendor>Code.Learn</Specification-Vendor>
+								<Specification-Version>${project.version}</Specification-Version>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>${versions-maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<!-- Plugins -->
+		<plugins>
+			<!-- -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+		<!-- Resources -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.yml</include>
+					<include>**/*.properties</include>
+					<include>**/*.conf</include>
+					<include>**/*.json</include>
+					<include>**/*.xml</include>
+					<include>**/*.csv</include>
+					<include>**/*.sql</include>
+					<include>**/*.ftl</include>
+					<include>**/*.pem</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xlsx</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<defaultGoal>package</defaultGoal>
+		<directory>${basedir}/target</directory>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+	</build>
+</project>
