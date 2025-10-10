@@ -254,9 +254,6 @@
 								<includes>
 									<include>**/*.properties</include>
 								</includes>
-								<excludes>
-									<exclude></exclude>
-								</excludes>
 							</configuration>
 						</execution>
 					</executions>
