@@ -275,7 +275,7 @@
 							</manifest>
 							<manifestEntries>
 								<Copyright>(c) Code.Hub 2025</Copyright>
-								<Implementation-Title>TIntroduction to Microservices architecture using Java and Spring Cloud
+								<Implementation-Title>Introduction to Microservices architecture using Java and Spring Cloud
 								</Implementation-Title>
 								<Implementation-Vendor>Code.Learn</Implementation-Vendor>
 								<Implementation-Version>${project.version}</Implementation-Version>
@@ -336,12 +336,6 @@
 					<include>**/*.pem</include>
 				</includes>
 				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.xlsx</include>
-				</includes>
 			</resource>
 		</resources>
 
