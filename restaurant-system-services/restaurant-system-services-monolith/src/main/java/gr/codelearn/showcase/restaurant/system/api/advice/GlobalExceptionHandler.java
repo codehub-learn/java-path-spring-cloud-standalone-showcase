@@ -1,12 +1,13 @@
-package gr.codelearn.showcase.restaurant.system.advice;
+package gr.codelearn.showcase.restaurant.system.api.advice;
+
+import gr.codelearn.showcase.restaurant.system.api.transfer.ApiError;
+import gr.codelearn.showcase.restaurant.system.api.transfer.ApiResponse;
 import gr.codelearn.showcase.restaurant.system.component.BaseComponent;
 import gr.codelearn.showcase.restaurant.system.exception.ContentException;
 import gr.codelearn.showcase.restaurant.system.exception.RejectedOperationException;
 import gr.codelearn.showcase.restaurant.system.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.exception.RestaurantException;
 import gr.codelearn.showcase.restaurant.system.exception.ValidationException;
-import gr.codelearn.showcase.restaurant.system.api.transfer.ApiError;
-import gr.codelearn.showcase.restaurant.system.api.transfer.ApiResponse;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -215,7 +216,6 @@ public class GlobalExceptionHandler extends BaseComponent {
 				ApiResponse.builder().apiError(getApiError(ex, HttpStatus.BAD_REQUEST, request, customMessage)).build(),
 				HttpStatus.BAD_REQUEST);
 	}
-
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<ApiResponse<?>> handleException(final MethodArgumentNotValidException ex,

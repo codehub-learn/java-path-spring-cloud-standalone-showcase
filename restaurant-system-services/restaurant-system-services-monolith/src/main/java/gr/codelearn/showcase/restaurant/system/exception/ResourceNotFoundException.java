@@ -2,7 +2,6 @@ package gr.codelearn.showcase.restaurant.system.exception;
 
 import lombok.Getter;
 
-// This exception is thrown when an item is not found in the database.
 @Getter
 public class ResourceNotFoundException extends ContentException {
 	private String resource;

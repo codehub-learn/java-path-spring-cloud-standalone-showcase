@@ -2,8 +2,6 @@ package gr.codelearn.showcase.restaurant.system.api.controller;
 
 import gr.codelearn.showcase.restaurant.system.api.mapper.ReservationMapper;
 import gr.codelearn.showcase.restaurant.system.api.resource.ReservationResource;
-import gr.codelearn.showcase.restaurant.system.domain.Customer;
-import gr.codelearn.showcase.restaurant.system.domain.Reservation;
 import gr.codelearn.showcase.restaurant.system.service.CustomerService;
 import gr.codelearn.showcase.restaurant.system.service.ReservationService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +32,10 @@ public class ReservationController {
 	}
 
 	@PostMapping
-	public Reservation create(@RequestBody ReservationResource reservation) {
-		// TODO
-		Customer c = customerService.createCustomer(name, phone);
-		return reservationService.createReservation(c, tableNumber);
+	public ReservationResource create(@RequestBody ReservationResource reservationResource) {
+		//TODO Business-wise & validation
+		customerService.findById(reservationResource.customerId());
+
+		return reservationMapper.toResource(reservationService.createReservation(reservationMapper.toDomain(reservationResource)));
 	}
 }
