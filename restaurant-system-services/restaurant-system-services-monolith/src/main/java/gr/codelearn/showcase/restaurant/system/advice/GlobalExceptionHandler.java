@@ -5,12 +5,9 @@ import gr.codelearn.showcase.restaurant.system.exception.RejectedOperationExcept
 import gr.codelearn.showcase.restaurant.system.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.exception.RestaurantException;
 import gr.codelearn.showcase.restaurant.system.exception.ValidationException;
-import gr.codelearn.showcase.restaurant.system.transfer.ApiError;
-import gr.codelearn.showcase.restaurant.system.transfer.ApiResponse;
-import jakarta.transaction.SystemException;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import gr.codelearn.showcase.restaurant.system.api.transfer.ApiError;
+import gr.codelearn.showcase.restaurant.system.api.transfer.ApiResponse;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -28,11 +25,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-
-import java.nio.file.AccessDeniedException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends BaseComponent {
