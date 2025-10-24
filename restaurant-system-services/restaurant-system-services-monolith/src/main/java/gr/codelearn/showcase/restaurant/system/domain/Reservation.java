@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Reservation {
+	//TODO
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

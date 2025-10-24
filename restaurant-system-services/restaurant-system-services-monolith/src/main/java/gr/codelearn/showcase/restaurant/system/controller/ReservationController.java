@@ -30,7 +30,7 @@ public class ReservationController {
 
 	@PostMapping
 	public Reservation create(@RequestParam String name, @RequestParam String phone, @RequestParam int tableNumber) {
-		// ΝΟΤΕ
+		// TODO
 		Customer c = customers.createCustomer(name, phone);
 		return reservations.createReservation(c, tableNumber);
 	}
