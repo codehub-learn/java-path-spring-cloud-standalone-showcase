@@ -1,4 +1,4 @@
-package gr.codelearn.showcase.restaurant.system.transfer;
+package gr.codelearn.showcase.restaurant.system.api.transfer;
 
 import lombok.Value;
 

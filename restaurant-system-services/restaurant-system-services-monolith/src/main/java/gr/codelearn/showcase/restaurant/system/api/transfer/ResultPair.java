@@ -1,4 +1,4 @@
-package gr.codelearn.showcase.restaurant.system.transfer;
+package gr.codelearn.showcase.restaurant.system.api.transfer;
 
 public interface ResultPair<T1, T2> {
 	T1 getKey();
