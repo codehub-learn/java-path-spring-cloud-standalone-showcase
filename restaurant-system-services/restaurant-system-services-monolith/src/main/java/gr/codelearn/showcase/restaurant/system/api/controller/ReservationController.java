@@ -4,6 +4,7 @@ import gr.codelearn.showcase.restaurant.system.api.mapper.ReservationMapper;
 import gr.codelearn.showcase.restaurant.system.api.resource.ReservationResource;
 import gr.codelearn.showcase.restaurant.system.service.CustomerService;
 import gr.codelearn.showcase.restaurant.system.service.ReservationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
+@RequiredArgsConstructor
 public class ReservationController {
 	private final ReservationService reservationService;
 	private final CustomerService customerService;
 	private final ReservationMapper reservationMapper;
-
-	public ReservationController(ReservationService reservationService, CustomerService customerService,
-								 ReservationMapper reservationMapper) {
-		this.reservationService = reservationService;
-		this.customerService = customerService;
-		this.reservationMapper = reservationMapper;
-	}
 
 	@GetMapping
 	public List<ReservationResource> all() {

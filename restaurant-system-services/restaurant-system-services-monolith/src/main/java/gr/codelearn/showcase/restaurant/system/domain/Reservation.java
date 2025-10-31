@@ -6,13 +6,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "reservations")
 public class Reservation {
-	//TODO
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,36 +29,4 @@ public class Reservation {
 
 	private LocalDateTime reservationTime;
 	private int tableNumber;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public LocalDateTime getReservationTime() {
-		return reservationTime;
-	}
-
-	public void setReservationTime(LocalDateTime reservationTime) {
-		this.reservationTime = reservationTime;
-	}
-
-	public int getTableNumber() {
-		return tableNumber;
-	}
-
-	public void setTableNumber(int tableNumber) {
-		this.tableNumber = tableNumber;
-	}
 }

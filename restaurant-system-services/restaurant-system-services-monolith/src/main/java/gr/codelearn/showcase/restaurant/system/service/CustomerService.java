@@ -3,18 +3,16 @@ package gr.codelearn.showcase.restaurant.system.service;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
 import gr.codelearn.showcase.restaurant.system.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.repository.CustomerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+//TODO
 public class CustomerService {
-	//TODO
 	private final CustomerRepository customerRepository;
-
-	public CustomerService(CustomerRepository customerRepository) {
-		this.customerRepository = customerRepository;
-	}
 
 	public Customer create(final Customer customer) {
 		return customerRepository.save(customer);

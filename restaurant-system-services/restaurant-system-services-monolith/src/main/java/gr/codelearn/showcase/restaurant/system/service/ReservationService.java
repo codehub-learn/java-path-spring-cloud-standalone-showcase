@@ -2,18 +2,16 @@ package gr.codelearn.showcase.restaurant.system.service;
 
 import gr.codelearn.showcase.restaurant.system.domain.Reservation;
 import gr.codelearn.showcase.restaurant.system.repository.ReservationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+//TODO
 public class ReservationService {
-	//TODO
 	private final ReservationRepository reservations;
-
-	public ReservationService(ReservationRepository reservations) {
-		this.reservations = reservations;
-	}
 
 	public List<Reservation> allReservations() {
 		return reservations.findAll();
