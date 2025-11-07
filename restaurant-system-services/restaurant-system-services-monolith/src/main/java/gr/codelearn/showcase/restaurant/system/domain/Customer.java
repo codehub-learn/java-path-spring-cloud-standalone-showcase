@@ -2,27 +2,23 @@ package gr.codelearn.showcase.restaurant.system.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
+@SuperBuilder
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 @Table(name = "customers")
-public class Customer {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(updatable = false, nullable = false)
-	private Long id;
-
+public class Customer extends BaseModel {
 	@Column(nullable = false, length = 50)
 	private String name;
 	@Column(nullable = false, length = 50)
