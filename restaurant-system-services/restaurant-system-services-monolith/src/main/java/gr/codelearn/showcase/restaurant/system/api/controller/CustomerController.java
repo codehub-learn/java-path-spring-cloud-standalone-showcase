@@ -4,7 +4,7 @@ import gr.codelearn.showcase.restaurant.system.api.mapper.CustomerMapper;
 import gr.codelearn.showcase.restaurant.system.api.resource.CustomerResource;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
 import gr.codelearn.showcase.restaurant.system.exception.ContentException;
-import gr.codelearn.showcase.restaurant.system.service.CustomerService;
+import gr.codelearn.showcase.restaurant.system.service.CustomerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/customers")
 @RequiredArgsConstructor
 public class CustomerController {
-	private final CustomerService customerService;
+	private final CustomerServiceImpl customerService;
 	private final CustomerMapper customerMapper;
 
 	@GetMapping

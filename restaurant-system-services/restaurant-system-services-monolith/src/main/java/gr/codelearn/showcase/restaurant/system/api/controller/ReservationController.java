@@ -2,8 +2,8 @@ package gr.codelearn.showcase.restaurant.system.api.controller;
 
 import gr.codelearn.showcase.restaurant.system.api.mapper.ReservationMapper;
 import gr.codelearn.showcase.restaurant.system.api.resource.ReservationResource;
-import gr.codelearn.showcase.restaurant.system.service.CustomerService;
-import gr.codelearn.showcase.restaurant.system.service.ReservationService;
+import gr.codelearn.showcase.restaurant.system.service.CustomerServiceImpl;
+import gr.codelearn.showcase.restaurant.system.service.ReservationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +17,13 @@ import java.util.List;
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
 public class ReservationController {
-	private final ReservationService reservationService;
-	private final CustomerService customerService;
+	private final ReservationServiceImpl reservationService;
+	private final CustomerServiceImpl customerService;
 	private final ReservationMapper reservationMapper;
 
 	@GetMapping
 	public List<ReservationResource> all() {
-		return reservationMapper.toResources(reservationService.allReservations());
+		return reservationMapper.toResources(reservationService.findAll());
 	}
 
 	@PostMapping
