@@ -3,6 +3,7 @@ package gr.codelearn.showcase.restaurant.system.service;
 import gr.codelearn.showcase.restaurant.system.domain.Reservation;
 import gr.codelearn.showcase.restaurant.system.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ReservationServiceImpl extends BaseServiceImpl<Reservation, Long> implements ReservationService {
 	private final ReservationRepository reservationRepository;
+	private final ApplicationEventPublisher publisher;
 
 	@Override
 	public JpaRepository<Reservation, Long> getRepository() {
@@ -19,6 +21,9 @@ public class ReservationServiceImpl extends BaseServiceImpl<Reservation, Long> i
 	@Override
 	public Reservation createReservation(final Reservation reservation) {
 		//TODO Service integration
-		return reservationRepository.save(reservation);
+		var savedReservation = reservationRepository.save(reservation);
+		publisher.publishEvent(savedReservation);
+
+		return savedReservation;
 	}
 }
