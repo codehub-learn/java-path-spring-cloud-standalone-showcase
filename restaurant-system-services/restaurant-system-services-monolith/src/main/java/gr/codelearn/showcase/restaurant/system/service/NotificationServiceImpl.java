@@ -17,7 +17,7 @@ public class NotificationServiceImpl extends BaseServiceImpl<Notification, Long>
 		return notificationRepository;
 	}
 
-	@Async("")
+	@Async
 	public void sendReservationConfirmation(String recipient, String message) {
 		logger.info("Sending reservation confirmation to {}: {}", recipient, message);
 		notificationRepository.save(new Notification(recipient, message));

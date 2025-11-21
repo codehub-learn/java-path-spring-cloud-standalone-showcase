@@ -28,9 +28,6 @@ public class ReservationController {
 
 	@PostMapping
 	public ReservationResource create(@RequestBody ReservationResource reservationResource) {
-		//TODO Business-wise & validation
-		customerService.findById(reservationResource.customerId());
-
 		return reservationMapper.toResource(reservationService.createReservation(reservationMapper.toDomain(reservationResource)));
 	}
 }

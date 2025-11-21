@@ -26,4 +26,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 		return customerRepository.findByNameAndEmail(name, email).orElseThrow(
 				() -> new ResourceNotFoundException(("Customer %s (%s) was not found").formatted(name, email)));
 	}
+
+	public Customer findByPhone(final String phone) {
+		return customerRepository.findByPhone(phone).orElseThrow(
+				() -> new ResourceNotFoundException(("Customer with phone %s was not found").formatted(phone)));
+	}
 }

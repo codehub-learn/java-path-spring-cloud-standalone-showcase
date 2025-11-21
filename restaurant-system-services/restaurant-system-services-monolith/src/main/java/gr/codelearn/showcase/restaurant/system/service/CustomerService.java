@@ -6,4 +6,6 @@ public interface CustomerService extends BaseService<Customer, Long> {
 	Customer findById(Long id);
 
 	Customer findByNameAndEmail(String name, String email);
+
+	Customer findByPhone(String phone);
 }
