@@ -14,6 +14,7 @@ public class ReservationServiceImpl extends BaseServiceImpl<Reservation, Long> i
 	private final ReservationRepository reservationRepository;
 	private final ReservationValidator reservationValidator;
 	private final ApplicationEventPublisher publisher;
+	private final CustomerService customerService;
 
 	@Override
 	public JpaRepository<Reservation, Long> getRepository() {
@@ -23,6 +24,11 @@ public class ReservationServiceImpl extends BaseServiceImpl<Reservation, Long> i
 	@Override
 	public Reservation createReservation(final Reservation reservation) {
 		reservationValidator.ensureCustomerExists(reservation);
+		if (reservation.getCustomer().getEmail() != null && reservation.getCustomer().getId() == null) {
+			reservation.setCustomer(customerService.findByEmail(reservation.getCustomer().getEmail()));
+		} else if (reservation.getCustomer().getPhone() != null && reservation.getCustomer().getId() == null) {
+			reservation.setCustomer(customerService.findByPhone(reservation.getCustomer().getPhone()));
+		}
 		var savedReservation = reservationRepository.save(reservation);
 
 		publisher.publishEvent(savedReservation);

@@ -14,15 +14,15 @@ public class ReservationValidator {
 	public void ensureCustomerExists(final Reservation reservation) {
 		if (reservation == null || reservation.getCustomer() == null) {
 			throw new RejectedOperationException(
-					"You cannot perform this operation as either reservation or reservation customer is " + "empty.");
+					"You cannot perform this operation as either reservation or reservation customer is empty.");
 		}
 
 		if (reservation.getCustomer().getId() != null) {
 			customerService.findById(reservation.getCustomer().getId());
 			return;
 		}
-		if (reservation.getCustomer().getName() != null && reservation.getCustomer().getEmail() != null) {
-			customerService.findByNameAndEmail(reservation.getCustomer().getName(), reservation.getCustomer().getEmail());
+		if (reservation.getCustomer().getEmail() != null) {
+			customerService.findByEmail(reservation.getCustomer().getEmail());
 			return;
 		}
 		if (reservation.getCustomer().getPhone() != null) {
