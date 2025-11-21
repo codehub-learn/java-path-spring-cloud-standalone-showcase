@@ -2,9 +2,8 @@ package gr.codelearn.showcase.restaurant.system.api.controller;
 
 import gr.codelearn.showcase.restaurant.system.api.mapper.CustomerMapper;
 import gr.codelearn.showcase.restaurant.system.api.resource.CustomerResource;
-import gr.codelearn.showcase.restaurant.system.domain.Customer;
-import gr.codelearn.showcase.restaurant.system.exception.ContentException;
 import gr.codelearn.showcase.restaurant.system.service.CustomerServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,15 +26,7 @@ public class CustomerController {
 	}
 
 	@PostMapping
-	public CustomerResource create(@RequestBody CustomerResource customerResource) {
-		//TODO Business-wise
-		Customer customer = null;
-		try {
-			customer = customerService.findByNameAndEmail(customerResource.name(), customerResource.email());
-		} catch (ContentException e) {
-			customer = customerService.create(customerMapper.toDomain(customerResource));
-		}
-
-		return customerMapper.toResource(customer);
+	public CustomerResource create(@RequestBody @Valid CustomerResource customerResource) {
+		return customerMapper.toResource(customerService.create(customerMapper.toDomain(customerResource)));
 	}
 }

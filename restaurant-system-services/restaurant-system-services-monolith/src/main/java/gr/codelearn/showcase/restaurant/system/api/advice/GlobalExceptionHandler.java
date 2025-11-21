@@ -136,9 +136,6 @@ public class GlobalExceptionHandler extends BaseComponent {
 		var customMessage = """
 							There was a constraint violation while interacting with the associated database.
 							Make sure the action submitted does not violate business associations.
-							E.g.
-							Cannot delete a training edition associated with a training instance or supplier contracts.
-							Cannot delete an account associated as instructor with a training edition or a training instance.
 							""";
 		logger.error("{}", customMessage, ex);
 
