@@ -25,5 +25,6 @@ public class Reservation extends BaseModel {
 	private Customer customer;
 
 	private LocalDateTime reservationTime;
+	private String place;
 	private int tableNumber;
 }
