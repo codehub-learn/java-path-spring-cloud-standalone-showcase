@@ -19,6 +19,7 @@
 	<description>Restaurant System Services</description>
 
 	<modules>
+		<module>restaurant-system-services-commons</module>
 		<module>restaurant-system-services-monolith</module>
 		<module>restaurant-system-services-notification</module>
 	</modules>

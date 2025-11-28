@@ -1,5 +1,6 @@
 package gr.codelearn.showcase.restaurant.system.service;
 
+import gr.codelearn.showcase.restaurant.commons.service.BaseServiceImpl;
 import gr.codelearn.showcase.restaurant.system.domain.Reservation;
 import gr.codelearn.showcase.restaurant.system.repository.ReservationRepository;
 import gr.codelearn.showcase.restaurant.system.validation.ReservationValidator;

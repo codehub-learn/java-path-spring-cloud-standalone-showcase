@@ -1,5 +1,6 @@
 package gr.codelearn.showcase.restaurant.system.service;
 
+import gr.codelearn.showcase.restaurant.commons.service.BaseService;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
 
 public interface CustomerService extends BaseService<Customer, Long> {

@@ -1,7 +1,7 @@
 package gr.codelearn.showcase.restaurant.system.validation;
 
+import gr.codelearn.showcase.restaurant.commons.exception.RejectedOperationException;
 import gr.codelearn.showcase.restaurant.system.domain.Reservation;
-import gr.codelearn.showcase.restaurant.system.exception.RejectedOperationException;
 import gr.codelearn.showcase.restaurant.system.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

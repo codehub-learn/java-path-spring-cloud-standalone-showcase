@@ -28,10 +28,11 @@
 	<inceptionYear>2025</inceptionYear>
 
 	<modules>
-		<!-- Properties/Variables -->
 		<module>restaurant-system-infra</module>
 		<module>restaurant-system-services</module>
 	</modules>
+
+	<!-- Properties/Variables -->
 	<properties>
 		<!-- Desired Maven version -->
 		<maven.version>3.9.11</maven.version>
@@ -43,7 +44,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!--Spring Cloud-->
-		<spring.cloud.version>2025.1.0</spring.cloud.version>
+		<spring.cloud.version>2025.0.0</spring.cloud.version>
+		<spring.cloud.modules.version>5.0.0</spring.cloud.modules.version>
 
 		<!-- Maven plugins -->
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>

@@ -1,7 +1,7 @@
 package gr.codelearn.showcase.restaurant.notification.api.controller;
 
+import gr.codelearn.showcase.restaurant.commons.api.resource.NotificationResource;
 import gr.codelearn.showcase.restaurant.notification.api.mapper.NotificationMapper;
-import gr.codelearn.showcase.restaurant.notification.api.resource.NotificationResource;
 import gr.codelearn.showcase.restaurant.notification.service.NotificationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/notifications")
 @RequiredArgsConstructor
 public class NotificationController {
 	private final NotificationService notificationService;

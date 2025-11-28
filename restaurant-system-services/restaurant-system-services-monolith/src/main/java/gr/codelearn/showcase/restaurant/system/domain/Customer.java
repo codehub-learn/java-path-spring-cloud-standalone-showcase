@@ -1,5 +1,6 @@
 package gr.codelearn.showcase.restaurant.system.domain;
 
+import gr.codelearn.showcase.restaurant.commons.domain.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;

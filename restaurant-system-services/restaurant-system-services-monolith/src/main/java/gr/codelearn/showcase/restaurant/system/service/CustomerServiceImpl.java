@@ -1,8 +1,9 @@
 package gr.codelearn.showcase.restaurant.system.service;
 
+import gr.codelearn.showcase.restaurant.commons.exception.RejectedOperationException;
+import gr.codelearn.showcase.restaurant.commons.exception.ResourceNotFoundException;
+import gr.codelearn.showcase.restaurant.commons.service.BaseServiceImpl;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
-import gr.codelearn.showcase.restaurant.system.exception.RejectedOperationException;
-import gr.codelearn.showcase.restaurant.system.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.repository.CustomerRepository;
 import gr.codelearn.showcase.restaurant.system.validation.CustomerValidator;
 import lombok.RequiredArgsConstructor;

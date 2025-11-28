@@ -1,8 +1,8 @@
 package gr.codelearn.showcase.restaurant.system.validation;
 
+import gr.codelearn.showcase.restaurant.commons.exception.RejectedOperationException;
+import gr.codelearn.showcase.restaurant.commons.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
-import gr.codelearn.showcase.restaurant.system.exception.RejectedOperationException;
-import gr.codelearn.showcase.restaurant.system.exception.ResourceNotFoundException;
 import gr.codelearn.showcase.restaurant.system.service.CustomerService;
 import org.springframework.stereotype.Component;
 

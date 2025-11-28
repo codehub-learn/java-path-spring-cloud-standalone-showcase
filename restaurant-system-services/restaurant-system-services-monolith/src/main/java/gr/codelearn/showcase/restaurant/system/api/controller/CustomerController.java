@@ -1,7 +1,7 @@
 package gr.codelearn.showcase.restaurant.system.api.controller;
 
+import gr.codelearn.showcase.restaurant.commons.api.resource.CustomerResource;
 import gr.codelearn.showcase.restaurant.system.api.mapper.CustomerMapper;
-import gr.codelearn.showcase.restaurant.system.api.resource.CustomerResource;
 import gr.codelearn.showcase.restaurant.system.service.CustomerServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,8 @@
 package gr.codelearn.showcase.restaurant.system.api.mapper;
 
-import gr.codelearn.showcase.restaurant.system.api.resource.CustomerResource;
+import gr.codelearn.showcase.restaurant.commons.api.mapper.BaseMapper;
+import gr.codelearn.showcase.restaurant.commons.api.mapper.IgnoreUnmappedMapperConfig;
+import gr.codelearn.showcase.restaurant.commons.api.resource.CustomerResource;
 import gr.codelearn.showcase.restaurant.system.domain.Customer;
 import org.mapstruct.Mapper;
 

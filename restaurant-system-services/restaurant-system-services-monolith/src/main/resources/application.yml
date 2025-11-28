@@ -101,3 +101,9 @@ spring:
     timeout-per-shutdown-phase: 1m
   main:
     banner-mode: off
+
+  cloud:
+    openfeign:
+      autoconfiguration:
+        jackson:
+          enabled: true

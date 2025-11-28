@@ -1,5 +1,6 @@
 package gr.codelearn.showcase.restaurant.system.domain;
 
+import gr.codelearn.showcase.restaurant.commons.domain.BaseModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;

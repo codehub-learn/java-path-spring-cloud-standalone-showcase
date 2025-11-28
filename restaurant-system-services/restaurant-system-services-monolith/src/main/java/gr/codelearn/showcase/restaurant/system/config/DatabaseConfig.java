@@ -1,6 +1,6 @@
 package gr.codelearn.showcase.restaurant.system.config;
 
-import gr.codelearn.showcase.restaurant.system.component.BaseComponent;
+import gr.codelearn.showcase.restaurant.commons.component.BaseComponent;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
