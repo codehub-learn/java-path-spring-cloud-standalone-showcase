@@ -1,3 +1,5 @@
+name: restaurant-μservices-showcase
+
 # https://docs.docker.com/compose/compose-file
 services:
   postgres-restaurant:
