@@ -9,9 +9,8 @@
 	<artifactId>restaurant-system-services-notification</artifactId>
 	<parent>
 		<groupId>gr.codelearn.showcase</groupId>
-		<artifactId>restaurant-system</artifactId>
+		<artifactId>restaurant-system-services</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
 	<!-- Meta-data -->
@@ -55,26 +54,10 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<!-- Plugins -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-						<exclude>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct</artifactId>
-						</exclude>
-					</excludes>
-					<layers>
-						<enabled>true</enabled>
-					</layers>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
