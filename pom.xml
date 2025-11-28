@@ -43,7 +43,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!--Spring Cloud-->
-		<spring.cloud.version>2025.0.0</spring.cloud.version>
+		<spring.cloud.version>2025.1.0</spring.cloud.version>
 
 		<!-- Maven plugins -->
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
