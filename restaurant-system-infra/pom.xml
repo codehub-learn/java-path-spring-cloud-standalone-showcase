@@ -19,5 +19,7 @@
 	<description>Restaurant infrastructure</description>
 
 	<modules>
+
+		<module>restaurant-system-eureka-server</module>
 	</modules>
 </project>

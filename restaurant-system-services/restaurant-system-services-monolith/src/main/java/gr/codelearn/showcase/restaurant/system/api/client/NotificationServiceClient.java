@@ -4,8 +4,8 @@ import gr.codelearn.showcase.restaurant.commons.api.resource.NotificationResourc
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "notification-service", url = "http://localhost:10000")
+@FeignClient(name = "notification-service", path = "/api")
 public interface NotificationServiceClient {
-	@PostMapping("/api/notifications")
+	@PostMapping("/notifications")
 	void sendNotification(NotificationResource notificationResource);
 }
