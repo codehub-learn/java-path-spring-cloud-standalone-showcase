@@ -24,8 +24,9 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  # It thinks that it is part of a cluster when it is configured with a list of other servers
+  #    service-url:
+  #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     # Configuration for disabling self-preservation
     enable-self-preservation: true
