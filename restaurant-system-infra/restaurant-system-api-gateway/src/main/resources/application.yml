@@ -4,7 +4,10 @@ server:
 spring:
   application:
     name: restaurant-system-api-gateway
-
+  cache:
+    type: caffeine
+  main:
+    banner-mode: off
   cloud:
     gateway:
       server:
@@ -13,6 +16,13 @@ spring:
             locator:
               enabled: true
               lower-case-service-id: true
+          default-filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 500
+                redis-rate-limiter.burstCapacity: 1000
+                key-resolver: "#{@globalKeyResolver}"
+
           # Static routes (no discovery locator magic yet)
           routes:
             - id: restaurant-monolith
@@ -22,6 +32,28 @@ spring:
                 # If controllers are on /api/**, just proxy them as-is:
                 - Path=/api/reservations/**,/api/customers/**
                 - Method=GET,POST,PUT,DELETE
+              filters:
+                # Rate limit = X requests / second / key
+                # it expects a KeyResolver bean. If none is present → rate limiting may silently not work or default to per-route
+                # behavior depending on the version.
+                #
+                # Effect:
+                # - Max 200 req/sec TOTAL
+                # - Max 20 req/sec per user
+                # This prevents:
+                # - DDoS
+                # - Single noisy clients
+                # - Backend saturation
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 200
+                    redis-rate-limiter.burstCapacity: 400
+                    key-resolver: "#{@globalKeyResolver}"
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 10 # Each API token: max 10 req/sec
+                    redis-rate-limiter.burstCapacity: 20 # Burst allowed up to 20
+                    key-resolver: "#{@apiKeyResolver}"
             - id: notification-monolith
               uri: lb://NOTIFICATION-SERVICE
               predicates:
@@ -29,22 +61,25 @@ spring:
                 # If controllers are on /api/**, just proxy them as-is:
                 - Path=/api/notifications/**
                 - Method=GET,POST,PUT,DELETE
-A          globalcors:
-  cors-configurations:
-    '[/**]':
-      allowed-origins:
-        - http://localhost:4200
-        - http://localhost:3000
-      allowed-methods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-      allowed-headers: "*"
-      allow-credentials: true
-  main:
-    banner-mode: off
-
+              filters:
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 15
+                    redis-rate-limiter.burstCapacity: 30
+                    key-resolver: "#{@apiKeyResolver}"
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowed-origins:
+                  - http://localhost:4200
+                  - http://localhost:3000
+                allowed-methods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                allowed-headers: "*"
+                allow-credentials: true
 management:
   endpoints:
     web:

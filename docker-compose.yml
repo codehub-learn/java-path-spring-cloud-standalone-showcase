@@ -2,6 +2,37 @@ name: restaurant-μservices-showcase
 
 # https://docs.docker.com/compose/compose-file
 services:
+  redis-cache:
+    image: redis:8.4-alpine
+    container_name: redis-cache
+    restart: on-failure
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 3
+        window: 60s
+      resources:
+        limits:
+          cpus: '1'
+          memory: 128M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
   postgres-restaurant:
     image: postgres:17-alpine
     restart: on-failure
