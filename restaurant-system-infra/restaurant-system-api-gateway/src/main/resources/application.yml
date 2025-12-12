@@ -29,6 +29,19 @@ spring:
                 # If controllers are on /api/**, just proxy them as-is:
                 - Path=/api/notifications/**
                 - Method=GET,POST,PUT,DELETE
+A          globalcors:
+  cors-configurations:
+    '[/**]':
+      allowed-origins:
+        - http://localhost:4200
+        - http://localhost:3000
+      allowed-methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      allowed-headers: "*"
+      allow-credentials: true
   main:
     banner-mode: off
 
