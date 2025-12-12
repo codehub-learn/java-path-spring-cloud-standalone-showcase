@@ -21,5 +21,6 @@
 	<modules>
 
 		<module>restaurant-system-eureka-server</module>
+		<module>restaurant-system-api-gateway</module>
 	</modules>
 </project>
