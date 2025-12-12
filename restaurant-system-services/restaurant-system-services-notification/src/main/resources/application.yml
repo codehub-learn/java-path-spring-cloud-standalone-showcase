@@ -99,6 +99,14 @@ spring:
     timeout-per-shutdown-phase: 1m
   main:
     banner-mode: off
+  cache:
+    type: caffeine
+  cloud:
+    loadbalancer:
+      cache:
+        enabled: true
+        caffeine:
+          spec: maximumSize=1000,expireAfterWrite=15s,expireAfterAccess=5s
 
 eureka:
   client:

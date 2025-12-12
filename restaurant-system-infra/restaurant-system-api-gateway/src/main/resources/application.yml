@@ -9,6 +9,11 @@ spring:
   main:
     banner-mode: off
   cloud:
+    loadbalancer:
+      cache:
+        enabled: true
+        caffeine:
+          spec: maximumSize=1000,expireAfterWrite=15s,expireAfterAccess=5s
     gateway:
       server:
         webflux:
