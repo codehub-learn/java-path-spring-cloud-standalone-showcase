@@ -107,27 +107,5 @@ spring:
         enabled: true
         caffeine:
           spec: maximumSize=1000,expireAfterWrite=15s,expireAfterAccess=5s
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    # How often to pull the registry from Eureka
-    registry-fetch-interval-seconds: 30
-    refresh:
-      enable: false
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: false
-    hostname: localhost
-    # Expiration > 2 × Renewal
-    # How often this instance sends a heartbeat to Eureka
-    lease-renewal-interval-in-seconds: 30
-    # How long Eureka waits without heartbeats before evicting
-    lease-expiration-duration-in-seconds: 90
-    # Optional but nice: more unique instance IDs in dashboards/logs
-    instance-id: ${spring.application.name}:${server.port}:${random.uuid}
-    metadata-map:
-      version: v0.0.1
-      environment: dev
+  config:
+    import: optional:configserver:http://localhost:8888
