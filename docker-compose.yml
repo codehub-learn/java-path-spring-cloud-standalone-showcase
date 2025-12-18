@@ -2,6 +2,27 @@ name: restaurant-μservices-showcase
 
 # https://docs.docker.com/compose/compose-file
 services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    restart: on-failure
+    ports:
+      - "9411:9411"
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://localhost:9411/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   redis-cache:
     image: redis:8.4-alpine
     container_name: redis-cache
