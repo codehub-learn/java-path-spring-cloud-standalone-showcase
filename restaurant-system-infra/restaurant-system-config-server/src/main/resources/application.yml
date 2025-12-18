@@ -24,9 +24,9 @@ spring:
         native:
           search-locations: file:///${user.home}/local-repo
           order: 100
-      allow-override: true #Later sources can override earlier ones
-      override-none: false #Overrides are allowed
-      override-system-properties: true #Config Server beats JVM args
+      allow-override: true # Later sources can override earlier ones
+      override-none: false # Overrides are allowed, its the master switch
+      override-system-properties: true # Config Server beats JVM args
 #  curl -X POST http://localhost:8888/encrypt -H "Content-Type: text/plain" -d '...';
 encrypt:
   key: 1h1i1hiasdh1iiy87y8y8uy78ijahsbsxbjahuaO21Iccvv2e23H1eeH2yrfa1298a12ww111ssq11GT1132322FxFcD
